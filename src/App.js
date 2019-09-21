@@ -3,6 +3,7 @@ import './App.css';
 import {fetchPokeData} from './services/fetchPokeData';
 import PokeList from './components/PokeList';
 import Filters from './components/Filters';
+import Home from './components/Home'
 
 class App extends React.Component {
  constructor(props) {
@@ -43,17 +44,11 @@ class App extends React.Component {
     return (
       <div className="app">
         <h1 className="title">mis pokemones felices</h1>
-
-        <Filters 
+        <Home 
           handleChangeInput={this.handleChangeInput}
           query={query}
+          pokeData={pokeData}  
         />
-        
-        <PokeList 
-          pokeData={pokeData}
-          query={query}
-        />
-
       </div>
     );
   }
