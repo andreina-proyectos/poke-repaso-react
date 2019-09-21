@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 import {fetchPokeData} from './services/fetchPokeData';
+import PokeList from './components/PokeList';
 
 class App extends React.Component {
  constructor(props) {
@@ -17,32 +18,29 @@ class App extends React.Component {
   getPokeDataFromApi() {
     fetchPokeData()
       .then(data => {
+
+        const newPokeData = data.map((pokeItem, index) => {
+          return {...pokeItem, newid:index}
+        })
+
         this.setState({
-          pokeData: data
+          pokeData: newPokeData
         })
       })
   }
 
   render() {
-    console.log('me estoy pintando', this.state.pokeData)
+  const {pokeData} = this.state;
     return (
       <div className="app">
-        <ul className="poke-list">
-          {this.state.pokeData.map(pokeItem => 
-            <li key={pokeItem.id} className="poke-card">
-              <h2 className="poke-name">{pokeItem.name}</h2>
-              
-              <img src={pokeItem.url} alt="" className="poke-img"/>
+        <h1 className="title">mis pokemones felices</h1>
+        <PokeList 
+          pokeData={pokeData}
+        />
 
-              {pokeItem.types.map(type=>
-                <p key={`${pokeItem.id}-type-${type}`} className="poke-type">{type}</p>
-              )}
-            </li>         
-          )}
-        </ul>
       </div>
     );
   }
 }
-
+              
 export default App;
