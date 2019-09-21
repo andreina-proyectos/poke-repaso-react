@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import {fetchPokeData} from './services/fetchPokeData';
 import PokeList from './components/PokeList';
+import Filters from './components/Filters';
 
 class App extends React.Component {
  constructor(props) {
@@ -42,7 +43,12 @@ class App extends React.Component {
     return (
       <div className="app">
         <h1 className="title">mis pokemones felices</h1>
-        <input onChange={this.handleChangeInput} type="text" className="input"/>
+
+        <Filters 
+          handleChangeInput={this.handleChangeInput}
+          query={query}
+        />
+        
         <PokeList 
           pokeData={pokeData}
           query={query}
