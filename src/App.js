@@ -5,10 +5,12 @@ import PokeList from './components/PokeList';
 
 class App extends React.Component {
  constructor(props) {
-  super(props);
+    super(props);
     this.state = {
-     pokeData: []
+     pokeData: [],
+     query:''
     }
+    this.handleChangeInput = this.handleChangeInput.bind(this)
   }
 
   componentDidMount() {
@@ -29,13 +31,21 @@ class App extends React.Component {
       })
   }
 
+  handleChangeInput(event) {
+    const query = event.currentTarget.value;
+
+    this.setState({query:query})
+  };
+
   render() {
-  const {pokeData} = this.state;
+  const {pokeData, query} = this.state;
     return (
       <div className="app">
         <h1 className="title">mis pokemones felices</h1>
+        <input onChange={this.handleChangeInput} type="text" className="input"/>
         <PokeList 
           pokeData={pokeData}
+          query={query}
         />
 
       </div>
