@@ -60,7 +60,16 @@ class App extends React.Component {
               }
             } 
           />
-          <Route path="/detail" component={PokeDetail}/>
+          <Route path="/detail/:pokeId" 
+            render={(routerProps) => {
+              return(
+              <PokeDetail
+                routerProps={routerProps}
+                pokeData={pokeData}
+              />
+            )}
+            }
+          />
         </Switch>
       </div>
     );
