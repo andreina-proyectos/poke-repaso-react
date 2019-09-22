@@ -3,7 +3,9 @@ import './App.css';
 import {fetchPokeData} from './services/fetchPokeData';
 import PokeList from './components/PokeList';
 import Filters from './components/Filters';
-import Home from './components/Home'
+import Home from './components/Home';
+import PokeDetail from './components/PokeDetail';
+import {Switch, Route} from 'react-router-dom';
 
 class App extends React.Component {
  constructor(props) {
@@ -43,12 +45,23 @@ class App extends React.Component {
   const {pokeData, query} = this.state;
     return (
       <div className="app">
-        <h1 className="title">mis pokemones felices</h1>
-        <Home 
-          handleChangeInput={this.handleChangeInput}
-          query={query}
-          pokeData={pokeData}  
-        />
+        <h1 className="title">mis pokemones felices</h1>      
+        <Switch>
+          <Route exact path="/"
+            render={
+              ()=>{
+                return(
+                  <Home 
+                  handleChangeInput={this.handleChangeInput}
+                  query={query}
+                  pokeData={pokeData}  
+                />
+                );
+              }
+            } 
+          />
+          <Route path="/detail" component={PokeDetail}/>
+        </Switch>
       </div>
     );
   }
